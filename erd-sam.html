@@ -1,0 +1,450 @@
+<title>ERD Sarana Agro Makmur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFEFB;--surface:#FFFFFF;--surface-2:#F4F6F1;--surface-3:#EDEFE8;
+  --ink:#13211A;--muted:#6B7A70;--line:#E2E8DF;--accent:#0F6F4E;--accent-2:#C5902E;
+  --radius:14px;--shadow:0 8px 32px rgba(19,33,26,.06),0 1px 0 rgba(19,33,26,.06);
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#0B1A14;--surface:#11261E;--surface-2:#162E24;--surface-3:#1B372B;
+  --ink:#EAF2EC;--muted:#8AA89A;--line:#1E3A2E;--accent:#3DD598;--accent-2:#E8B86A;
+  color-scheme:dark;--shadow:0 8px 32px rgba(0,0,0,.35);
+}}
+:root[data-theme="dark"]{--bg:#0B1A14;--surface:#11261E;--surface-2:#162E24;--surface-3:#1B372B;--ink:#EAF2EC;--muted:#8AA89A;--line:#1E3A2E;--accent:#3DD598;--accent-2:#E8B86A;color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--ink);font-family:"Plus Jakarta Sans",system-ui,sans-serif;line-height:1.5;margin:0;padding:0 0 32px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}@media(min-width:640px){.wrap{padding:0 24px}}
+.hero{border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--surface),var(--bg));padding-block:18px 20px;position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backdrop-filter:blur(8px)}
+.kicker{font:600 11px/1 "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:flex;gap:8px;align-items:center}
+.kicker i{width:28px;height:2px;background:var(--accent);display:inline-block;border-radius:99px}
+h1{font-family:"Fraunces",serif;font-weight:800;font-size:clamp(26px,4vw,38px);line-height:.95;letter-spacing:-.02em;margin:8px 0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent)}.sub{color:var(--muted);max-width:62ch;font-size:13.5px}
+.pill{font:600 11px "JetBrains Mono",monospace;padding:7px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted)}
+.pill strong{color:var(--ink)}.pill.accent{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 14px;border-radius:999px;font:600 13px "Plus Jakarta Sans",sans-serif;cursor:pointer}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.btn:active{transform:translateY(1px)}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.stat b{font:700 20px/1 "Fraunces",serif}.stat span{font:500 11px "JetBrains Mono",monospace;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;display:block;margin-top:2px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;margin-top:14px}
+.card-hd{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.card-hd h2{font:700 13px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;margin:0}
+.mermaid-wrap{padding:12px;background:var(--surface);overflow-x:auto}.mermaid-wrap pre{margin:0;min-width:860px}
+.note{padding:10px 14px;background:var(--surface-2);border-top:1px solid var(--line);font:500 12px/1.5 "Plus Jakarta Sans",sans-serif;color:var(--muted);display:flex;gap:8px;align-items:flex-start}.note b{color:var(--ink)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font:600 12px "Plus Jakarta Sans",sans-serif;cursor:pointer;color:var(--muted)}
+.tab.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.mermaid-box{display:none}.mermaid-box.active{display:block}
+.legend{font:500 12px/1.5 "Plus Jakarta Sans",sans-serif;color:var(--muted);padding:10px 14px;background:var(--surface-2);border-top:1px solid var(--line)}
+.legend b{color:var(--ink)}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th{font:700 11px "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.tbl td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:last-child td{border-bottom:0}
+code{font-family:"JetBrains Mono",monospace;font-size:12px;background:var(--surface-3);padding:2px 6px;border-radius:6px}
+.grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}}@media(min-width:1080px){.grid{grid-template-columns:repeat(3,1fr)}}
+.ent{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.ent.hidden{display:none}
+.ent-hd{padding:14px 14px 10px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line)}
+.ent-hd h3{font:700 14px "Fraunces",serif;margin:0;line-height:1}.ent-hd h3 span{font:600 11px "JetBrains Mono",monospace;color:var(--muted);display:block}
+.badge{font:700 10px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.fields{padding:8px 10px;display:flex;flex-direction:column}
+.row{display:flex;gap:8px;align-items:center;padding:7px 6px;border-radius:8px;font-size:12.5px}.row:nth-child(odd){background:var(--surface-2)}
+.k{font:600 11px "JetBrains Mono",monospace;min-width:92px}.k.pk{color:var(--accent)}.k.fk{color:var(--accent-2)}
+.v{color:var(--muted);font:500 11px "JetBrains Mono",monospace}.t{margin-left:auto;font:600 10px "JetBrains Mono",monospace;color:var(--muted);background:var(--surface-3);padding:3px 6px;border-radius:999px}
+.ent-ft{padding:10px 14px;border-top:1px solid var(--line);font:500 11.5px/1.4 "Plus Jakarta Sans",sans-serif;color:var(--muted);background:var(--surface-2)}
+.ent-ft strong{color:var(--ink)}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 0 8px;border-bottom:1px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font:600 12px "Plus Jakarta Sans",sans-serif;cursor:pointer;color:var(--muted)}
+.chip.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.search{flex:1;min-width:200px;max-width:320px;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 12px}
+.search input{border:0;outline:0;background:transparent;color:var(--ink);width:100%;font:500 13px "Plus Jakarta Sans",sans-serif}.search input::placeholder{color:var(--muted)}
+.footer{margin-top:18px;padding:14px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);font:500 12px/1.6 "Plus Jakarta Sans",sans-serif;background:var(--surface-2)}
+</style>
+
+<div class="hero"><div class="wrap">
+  <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-start">
+    <div style="flex:1;min-width:260px">
+      <div class="kicker"><i></i> POS Sarana Agro Makmur • ERD v2 — clean</div>
+      <h1>ERD clean <em>siap tempel</em> — tanpa warna warni</h1>
+      <p class="sub">Update: diagram sekarang <b>monochrome</b> (hitam-putih), ada versi <b>tanpa tipe data</b> untuk laporan & <b>dengan tipe</b> untuk lampiran teknis. Label kayak <code>berisi / dirinci / dilacak</code> gw jelasin di bawah — itu cuma kata kerja relasinya.</p>
+      <div class="meta">
+        <span class="pill"><strong>18</strong> entitas • <strong>25</strong> migration</span>
+        <span class="pill">2 mode: Ringkas & Lengkap</span>
+        <span class="pill accent">Copy → paste ke mermaid.live tetap B&W</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-self:flex-start">
+      <button class="btn primary" onclick="window.print()">Cetak / PDF</button>
+      <button class="btn" onclick="document.getElementById('sec-arti').scrollIntoView({behavior:'smooth'})">Arti label ↓</button>
+    </div>
+  </div>
+</div></div>
+
+<div class="wrap">
+
+  <!-- JAWABAN TIPE DATA -->
+  <div class="card">
+    <div class="card-hd"><h2>ERD itu pakai tipe data nggak sih?</h2><span style="font:600 11px 'JetBrains Mono',monospace;color:var(--muted)">jawaban singkat</span></div>
+    <div style="padding:14px 16px;display:grid;gap:12px;font-size:13px;line-height:1.6">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:12px">
+          <b style="font-family:Fraunces,serif;font-size:14px">Conceptual / Ringkas — tanpa tipe</b>
+          <div style="color:var(--muted);font-size:12.5px;margin-top:4px">Cuma <code>nama_tabel — atribut — PK/FK</code>. Cocok buat <b>laporan PBL, slide sidang, poster</b>. Bersih, gak bikin tabel warna-warni.</div>
+          <div style="margin-top:8px"><code>produk { id_produk PK, nama_produk, id_kategori FK }</code></div>
+        </div>
+        <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:12px">
+          <b style="font-family:Fraunces,serif;font-size:14px">Physical / Lengkap — pakai tipe</b>
+          <div style="color:var(--muted);font-size:12.5px;margin-top:4px">Tambah <code>bigint / string / int / date / enum</code> persis dari migration. Cocok buat <b>lampiran teknis / dokumentasi DB</b>.</div>
+          <div style="margin-top:8px"><code>produk { bigint id_produk PK, string nama_produk, int stok_gudang }</code></div>
+        </div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--muted);font-size:12.5px">
+        <b style="color:var(--ink)">Rekomendasi buat lu:</b> pakai <b>Mode Ringkas (tanpa tipe)</b> di bab laporan. Tipe data taruh di lampiran aja. Dosen nggak protes — malah lebih rapi. Di file ini gw sediain keduanya, tinggal copy yang lu butuh.
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;font:600 11px 'JetBrains Mono',monospace">
+        <span style="background:var(--surface-3);padding:6px 10px;border-radius:999px">bigint = angka bulat besar (ID)</span>
+        <span style="background:var(--surface-3);padding:6px 10px;border-radius:999px">string = teks pendek (varchar)</span>
+        <span style="background:var(--surface-3);padding:6px 10px;border-radius:999px">int = angka bulat</span>
+        <span style="background:var(--surface-3);padding:6px 10px;border-radius:999px">date/datetime = tanggal</span>
+        <span style="background:var(--surface-3);padding:6px 10px;border-radius:999px">enum = pilihan tetap</span>
+        <span style="background:var(--surface-3);padding:6px 10px;border-radius:999px">boolean = ya/tidak</span>
+        <span style="background:var(--surface-3);padding:6px 10px;border-radius:999px">json = data fleksibel</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIAGRAM DENGAN TABS -->
+  <div class="card">
+    <div class="card-hd">
+      <h2>Diagram — pilih mode</h2>
+      <div class="tabs">
+        <button class="tab active" data-tab="ringkas">Ringkas — tanpa tipe (B&W)</button>
+        <button class="tab" data-tab="lengkap">Lengkap — dengan tipe (B&W)</button>
+      </div>
+    </div>
+
+    <!-- RINGKAS -->
+    <div class="mermaid-box active" id="box-ringkas">
+      <div style="padding:10px 14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between;background:var(--surface-2);border-bottom:1px solid var(--line)">
+        <span style="font:600 11px 'JetBrains Mono',monospace;color:var(--muted)">Tempel langsung ke <b style="color:var(--ink)">mermaid.live</b> — sudah monochrome, tanpa warna per tabel</span>
+        <button class="btn primary" style="padding:7px 12px;font-size:12px" data-copy="mermaidRingkas">Salin Mermaid Ringkas</button>
+      </div>
+      <div class="mermaid-wrap"><pre class="mermaid" id="mermaidRingkas">%%{init: {"theme":"base","themeVariables":{"primaryColor":"#ffffff","primaryBorderColor":"#111111","primaryTextColor":"#111111","lineColor":"#111111","tertiaryColor":"#f6f6f6"}}}%%
+erDiagram
+  users ||--o{ transaksi : "one to many"
+  users ||--o{ jurnal : "one to many"
+  users ||--o{ beban_operasional : "one to many"
+  users ||--o{ riwayat_aksi : "one to many"
+  kategori ||--o{ produk : "one to many"
+  produk ||--o{ detail_transaksi : "one to many"
+  produk ||--o{ transfer_stok : "one to many"
+  transaksi ||--o{ detail_transaksi : "one to many"
+  pelanggan ||--o{ transaksi : "one to many"
+  suplier ||--o{ transaksi : "one to many"
+  pelanggan ||--o{ diskon : "one to many"
+  diskon ||--o{ diskon_produk : "one to many"
+  produk ||--o{ diskon_produk : "one to many"
+  produk }o--o{ diskon : "many to many"
+  akun ||--o{ detail_jurnal : "one to many"
+  jurnal ||--o{ detail_jurnal : "one to many"
+  akun ||--o{ beban_operasional : "one to many"
+  landing_pages ||--o{ landing_slides : "one to many"
+
+  users { bigint id PK  string name  string email UK  string role }
+  kategori { bigint id_kategori PK  string nama_kategori  string status }
+  produk { bigint id_produk PK  string kode_produk UK  string nama_produk UK  bigint id_kategori FK }
+  pelanggan { bigint id_pelanggan PK  string nama_pelanggan  string tipe }
+  suplier { bigint id_suplier PK  string nama_suplier }
+  transaksi { bigint id_transaksi PK  string jenis  date tanggal  bigint id_user FK  bigint id_pelanggan FK  bigint id_suplier FK }
+  detail_transaksi { bigint id_detail PK  bigint id_transaksi FK  bigint id_produk FK  int jumlah }
+  diskon { bigint id_diskon PK  string nama_diskon  date mulai_tgl  date selesai_tgl }
+  diskon_produk { bigint id PK  bigint id_diskon FK  bigint id_produk FK }
+  akun { bigint id_akun PK  string kode_akun UK  string nama_akun }
+  jurnal { bigint id_jurnal PK  string no_jurnal UK  date tanggal }
+  detail_jurnal { bigint id_detail_jurnal PK  bigint id_jurnal FK  bigint id_akun FK }
+  beban_operasional { bigint id_beban PK  date tanggal  bigint id_akun FK  int jumlah }
+  transfer_stok { bigint id_transfer PK  bigint id_produk FK  int jumlah_dus  int jumlah_pcs }
+  landing_pages { bigint id PK  string judul_h1 }
+  landing_slides { bigint id PK  bigint landing_page_id FK  string path }
+  riwayat_aksi { bigint id_riwayat PK  bigint id_user FK  string aksi }
+</pre></div>
+      <div class="legend">Kenapa B&W? Baris pertama <code>%%{init: ...}%%</code> ngunci tema jadi base — semua tabel putih, garis hitam. Kalau lu hapus baris itu, mermaid.live bakal kasih warna-warni lagi.</div>
+    </div>
+
+    <!-- LENGKAP -->
+    <div class="mermaid-box" id="box-lengkap">
+      <div style="padding:10px 14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between;background:var(--surface-2);border-bottom:1px solid var(--line)">
+        <span style="font:600 11px 'JetBrains Mono',monospace;color:var(--muted)">Versi lampiran teknis — tetap B&W, tapi kolom lengkap dengan tipe</span>
+        <button class="btn primary" style="padding:7px 12px;font-size:12px" data-copy="mermaidLengkap">Salin Mermaid Lengkap</button>
+      </div>
+      <div class="mermaid-wrap"><pre class="mermaid" id="mermaidLengkap">%%{init: {"theme":"base","themeVariables":{"primaryColor":"#ffffff","primaryBorderColor":"#111111","primaryTextColor":"#111111","lineColor":"#111111","tertiaryColor":"#f6f6f6"}}}%%
+erDiagram
+  users ||--o{ transaksi : "one to many"
+  users ||--o{ jurnal : "one to many"
+  users ||--o{ beban_operasional : "one to many"
+  users ||--o{ riwayat_aksi : "one to many"
+  kategori ||--o{ produk : "one to many"
+  produk ||--o{ detail_transaksi : "one to many"
+  produk ||--o{ transfer_stok : "one to many"
+  transaksi ||--o{ detail_transaksi : "one to many"
+  pelanggan ||--o{ transaksi : "one to many"
+  suplier ||--o{ transaksi : "one to many"
+  pelanggan ||--o{ diskon : "one to many"
+  diskon ||--o{ diskon_produk : "one to many"
+  produk ||--o{ diskon_produk : "one to many"
+  produk }o--o{ diskon : "many to many"
+  akun ||--o{ detail_jurnal : "one to many"
+  jurnal ||--o{ detail_jurnal : "one to many"
+  akun ||--o{ beban_operasional : "one to many"
+  landing_pages ||--o{ landing_slides : "one to many"
+
+  users {
+    bigint id PK
+    string name
+    string email UK
+    string role
+    string password
+    datetime deleted_at
+  }
+  kategori {
+    bigint id_kategori PK
+    string nama_kategori
+    string status
+    datetime deleted_at
+  }
+  produk {
+    bigint id_produk PK
+    string kode_produk UK
+    string nama_produk UK
+    bigint id_kategori FK
+    int harga_beli
+    int harga_satuan
+    int harga_grosir
+    int minimal_grosir
+    int stok_gudang
+    int stok_toko
+    int isi_per_dus
+    string satuan
+    datetime deleted_at
+  }
+  pelanggan {
+    bigint id_pelanggan PK
+    string nama_pelanggan
+    string no_hp
+    string tipe
+    datetime deleted_at
+  }
+  suplier {
+    bigint id_suplier PK
+    string nama_suplier
+    datetime deleted_at
+  }
+  transaksi {
+    bigint id_transaksi PK
+    string jenis
+    date tanggal
+    bigint id_user FK
+    bigint id_pelanggan FK
+    bigint id_suplier FK
+    bigint id_akun
+    int subtotal
+    int total_diskon
+    int total
+    int bayar
+    int kembalian
+    datetime deleted_at
+  }
+  detail_transaksi {
+    bigint id_detail_transaksi PK
+    bigint id_transaksi FK
+    bigint id_produk FK
+    string tipe
+    string tipe_stok
+    int jumlah
+    int harga
+    int harga_beli
+    int nominal_diskon
+    int subtotal
+  }
+  diskon {
+    bigint id_diskon PK
+    string nama_diskon
+    int besar_diskon
+    int minimal_beli
+    int minimal_beli_grosir
+    date mulai_tgl
+    date selesai_tgl
+    string lokasi_berlaku
+    bigint id_pelanggan FK
+    datetime deleted_at
+  }
+  diskon_produk {
+    bigint id PK
+    bigint id_diskon FK
+    bigint id_produk FK
+  }
+  akun {
+    bigint id_akun PK
+    string kode_akun UK
+    string nama_akun
+    string pos_saldo
+    string pos_laporan
+    datetime deleted_at
+  }
+  jurnal {
+    bigint id_jurnal PK
+    string no_jurnal UK
+    date tanggal
+    string ref_type
+    bigint ref_id
+    int total
+    bigint id_user FK
+    datetime deleted_at
+  }
+  detail_jurnal {
+    bigint id_detail_jurnal PK
+    bigint id_jurnal FK
+    bigint id_akun FK
+    int debet
+    int kredit
+  }
+  beban_operasional {
+    bigint id_beban PK
+    date tanggal
+    bigint id_akun FK
+    bigint id_user FK
+    int jumlah
+    datetime deleted_at
+  }
+  transfer_stok {
+    bigint id_transfer PK
+    bigint id_produk FK
+    int jumlah_dus
+    int jumlah_pcs
+    date tanggal
+  }
+  landing_pages {
+    bigint id PK
+    string judul_h1
+    string login_title
+    string login_bg_color
+  }
+  landing_slides {
+    bigint id PK
+    bigint landing_page_id FK
+    string path
+    string type
+    int order
+  }
+  riwayat_aksi {
+    bigint id_riwayat PK
+    bigint id_user FK
+    bigint id_transaksi FK
+    string aksi
+    string label
+    int total
+    json detail
+  }
+</pre></div>
+      <div class="legend">Dipakai kalau dosen minta <b>Physical ERD</b>. Kalau warna muncul lagi, pastikan baris <code>%%{init...}%%</code> paling atas ke-copy.</div>
+    </div>
+  </div>
+
+  <!-- ARTI LABEL -->
+  <div class="card" id="sec-arti">
+    <div class="card-hd"><h2>Arti label di garis — "berisi, dirinci, dilacak" itu apa?</h2></div>
+    <div style="padding:14px 16px">
+      <p style="margin:0 0 10px;color:var(--muted);font-size:13px">Itu <b style="color:var(--ink)">kata kerja relasinya</b> — dibaca searah panah. Contoh: <code>transaksi ||--o{ detail_transaksi : berisi</code> dibaca <b>"1 transaksi BERISI banyak detail_transaksi"</b>. Bukan nama kolom, cuma biar diagram bisa diceritain ke dosen.</p>
+      <div style="overflow-x:auto">
+      <table class="tbl">
+        <thead><tr><th>Label</th><th>Dibaca</th><th>Artinya di toko lu</th></tr></thead>
+        <tbody>
+          <tr><td><code>mengelompokkan</code></td><td>1 kategori mengelompokkan N produk</td><td>Produk wajib punya kategori (Sembako, Pupuk…)</td></tr>
+          <tr><td><code>berisi</code></td><td>1 transaksi berisi N detail</td><td>Struk 1 transaksi pecah jadi baris-baris item</td></tr>
+          <tr><td><code>dirinci</code></td><td>produk dirinci di detail_transaksi<br>jurnal dirinci di detail_jurnal</td><td>Header dirinci jadi line-item (rinciannya)</td></tr>
+          <tr><td><code>membeli / memasok</code></td><td>pelanggan membeli transaksi<br>suplier memasok transaksi</td><td>Bedain jual (pelanggan) vs beli/kulak (suplier)</td></tr>
+          <tr><td><code>dipindah</code></td><td>produk dipindah via transfer_stok</td><td>Pindah dus gudang → pcs toko</td></tr>
+          <tr><td><code>memetakan / dipromosikan</code></td><td>diskon memetakan produk</td><td>Pivot N—N: 1 promo buat banyak produk</td></tr>
+          <tr><td><code>dijurnal / dibebankan</code></td><td>akun dijurnal, beban dibebankan ke akun</td><td>COA: tiap jurnal & beban nempel ke akun</td></tr>
+          <tr><td><code>mencatat / membuat / jejak</code></td><td>user mencatat jurnal/transaksi</td><td>Audit: siapa kasir yang input</td></tr>
+          <tr><td><code>memiliki</code></td><td>landing_pages memiliki slides</td><td>CMS: 1 landing punya banyak slide</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div style="margin-top:10px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:12.5px;color:var(--muted)">
+        <b style="color:var(--ink)">Tips sidang:</b> kalau dosen tanya "kenapa dirinci?" jawab: <i>"Karena relasi 1—N, header (transaksi/jurnal) dirinci ke tabel detail biar bisa banyak item per transaksi."</i> Dijamin aman.
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTER + GRID KARTU (tetap ada tapi ringkas) -->
+  <div class="controls">
+    <div class="chips" id="chips">
+      <button class="chip active" data-f="all">Semua</button>
+      <button class="chip" data-f="master">Master</button>
+      <button class="chip" data-f="transaksi">Transaksi</button>
+      <button class="chip" data-f="akuntansi">Akuntansi</button>
+      <button class="chip" data-f="promo">Promo</button>
+      <button class="chip" data-f="sistem">Sistem</button>
+    </div>
+    <label class="search"><span style="color:var(--muted)">⌕</span><input id="q" placeholder="Cari tabel / kolom…"></label>
+  </div>
+  <div class="grid" id="grid" style="margin-top:10px">
+    <article class="ent" data-domain="master"><div class="ent-hd"><h3>users <span>users</span></h3><span class="badge" style="background:#E8F5E9;border-color:#C8E6C9">Sistem</span></div><div class="fields"><div class="row"><span class="k pk">● id PK</span><span class="v">bigint</span><span class="t">AI</span></div><div class="row"><span class="k">name / email UK</span><span class="v">string</span><span class="t">unique</span></div><div class="row"><span class="k">role</span><span class="v">kasir / pemilik</span><span class="t">default kasir</span></div></div><div class="ent-ft">1—N ke transaksi, jurnal, beban, riwayat_aksi</div></article>
+    <article class="ent" data-domain="master"><div class="ent-hd"><h3>kategori <span>kategori</span></h3><span class="badge" style="background:#E8F5E9;border-color:#C8E6C9">Master</span></div><div class="fields"><div class="row"><span class="k pk">● id_kategori PK</span><span class="v">bigint</span><span class="t">AI</span></div><div class="row"><span class="k">nama_kategori / status</span><span class="v">string</span><span class="t">active</span></div></div><div class="ent-ft">1 kategori → N produk (cascade)</div></article>
+    <article class="ent" data-domain="master"><div class="ent-hd"><h3>produk <span>produk — stok gudang & toko</span></h3><span class="badge" style="background:#E8F5E9;border-color:#C8E6C9">Master</span></div><div class="fields"><div class="row"><span class="k pk">● id_produk PK</span><span class="v">bigint</span><span class="t">UK×2</span></div><div class="row"><span class="k fk">◆ id_kategori FK</span><span class="v">→ kategori</span><span class="t">cascade</span></div><div class="row"><span class="k">stok_gudang / stok_toko / isi_per_dus</span><span class="v">int</span><span class="t">konversi</span></div><div class="row"><span class="k">harga_beli / satuan / grosir</span><span class="v">int / enum</span><span class="t">—</span></div></div><div class="ent-ft">Kunci toko: stok ganda + isi_per_dus buat transfer</div></article>
+    <article class="ent" data-domain="master"><div class="ent-hd"><h3>pelanggan <span>pelanggan</span></h3><span class="badge" style="background:#E8F5E9;border-color:#C8E6C9">Master</span></div><div class="fields"><div class="row"><span class="k pk">● id_pelanggan PK</span><span class="v">bigint</span><span class="t">AI</span></div><div class="row"><span class="k">nama / tipe</span><span class="v">member / non-member</span><span class="t">enum</span></div></div><div class="ent-ft">Dipakai penjualan + target diskon member</div></article>
+    <article class="ent" data-domain="master"><div class="ent-hd"><h3>suplier <span>suplier</span></h3><span class="badge" style="background:#E8F5E9;border-color:#C8E6C9">Master</span></div><div class="fields"><div class="row"><span class="k pk">● id_suplier PK</span><span class="v">bigint</span><span class="t">AI</span></div><div class="row"><span class="k">nama_suplier</span><span class="v">string</span><span class="t">—</span></div></div><div class="ent-ft">Dipakai pembelian (kulak)</div></article>
+    <article class="ent" data-domain="transaksi"><div class="ent-hd"><h3>transaksi <span>jual & beli</span></h3><span class="badge" style="background:#FFF3E0;border-color:#FFE0B2">Transaksi</span></div><div class="fields"><div class="row"><span class="k pk">● id_transaksi PK</span><span class="v">bigint</span><span class="t">AI</span></div><div class="row"><span class="k">jenis</span><span class="v">penjualan / pembelian</span><span class="t">enum</span></div><div class="row"><span class="k fk">◆ id_pelanggan / id_suplier</span><span class="v">FK nullable</span><span class="t">SET NULL</span></div></div><div class="ent-ft">Satu tabel untuk dua jenis — histori aman</div></article>
+    <article class="ent" data-domain="transaksi"><div class="ent-hd"><h3>detail_transaksi <span>line item</span></h3><span class="badge" style="background:#FFF3E0;border-color:#FFE0B2">Transaksi</span></div><div class="fields"><div class="row"><span class="k fk">◆ id_transaksi / id_produk</span><span class="v">FK cascade</span><span class="t">—</span></div><div class="row"><span class="k">tipe / tipe_stok / jumlah / harga</span><span class="v">enum / int</span><span class="t">—</span></div></div><div class="ent-ft">Jantung laporan — tipe untuk jual, tipe_stok untuk beli</div></article>
+    <article class="ent" data-domain="transaksi"><div class="ent-hd"><h3>transfer_stok <span>gudang → toko</span></h3><span class="badge" style="background:#FFF3E0;border-color:#FFE0B2">Transaksi</span></div><div class="fields"><div class="row"><span class="k fk">◆ id_produk FK</span><span class="v">→ produk</span><span class="t">cascade</span></div><div class="row"><span class="k">jumlah_dus / jumlah_pcs</span><span class="v">int</span><span class="t">konversi</span></div></div><div class="ent-ft">Log pindah stok via isi_per_dus</div></article>
+    <article class="ent" data-domain="promo"><div class="ent-hd"><h3>diskon <span>promo</span></h3><span class="badge" style="background:#FFF8E1;border-color:#FFECB3">Promo</span></div><div class="fields"><div class="row"><span class="k pk">● id_diskon PK</span><span class="v">bigint</span><span class="t">AI</span></div><div class="row"><span class="k">periode / lokasi / id_pelanggan</span><span class="v">date / enum / FK nullable</span><span class="t">member-only?</span></div></div><div class="ent-ft">Umum atau member-only (isi id_pelanggan)</div></article>
+    <article class="ent" data-domain="promo"><div class="ent-hd"><h3>diskon_produk <span>pivot</span></h3><span class="badge" style="background:#FFF8E1;border-color:#FFECB3">Promo</span></div><div class="fields"><div class="row"><span class="k fk">◆ id_diskon / id_produk</span><span class="v">FK cascade</span><span class="t">N—N</span></div></div><div class="ent-ft">Satu produk bisa banyak promo</div></article>
+    <article class="ent" data-domain="akuntansi"><div class="ent-hd"><h3>akun <span>COA</span></h3><span class="badge" style="background:#E3F2FD;border-color:#BBDEFB">Akuntansi</span></div><div class="fields"><div class="row"><span class="k pk">● id_akun PK</span><span class="v">bigint</span><span class="t">kode UK</span></div><div class="row"><span class="k">pos_saldo / pos_laporan</span><span class="v">debet/kredit / neraca/laba_rugi</span><span class="t">enum</span></div></div><div class="ent-ft">4 flag kas/transaksi online-offline</div></article>
+    <article class="ent" data-domain="akuntansi"><div class="ent-hd"><h3>jurnal + detail_jurnal</h3><span class="badge" style="background:#E3F2FD;border-color:#BBDEFB">Akuntansi</span></div><div class="fields"><div class="row"><span class="k">no_jurnal UK / ref_type+ref_id</span><span class="v">polimorfik</span><span class="t">index</span></div><div class="row"><span class="k">debet / kredit</span><span class="v">int</span><span class="t">harus balance</span></div></div><div class="ent-ft">Validasi debet=kredit di JurnalService</div></article>
+    <article class="ent" data-domain="akuntansi"><div class="ent-hd"><h3>beban_operasional</h3><span class="badge" style="background:#E3F2FD;border-color:#BBDEFB">Akuntansi</span></div><div class="fields"><div class="row"><span class="k fk">◆ id_akun FK</span><span class="v">→ akun</span><span class="t">—</span></div><div class="row"><span class="k">jumlah / tanggal</span><span class="v">int / date</span><span class="t">—</span></div></div><div class="ent-ft">Otomatis buat jurnal beban</div></article>
+    <article class="ent" data-domain="sistem"><div class="ent-hd"><h3>riwayat_aksi <span>audit log</span></h3><span class="badge" style="background:#F3E5F5;border-color:#E1BEE7">Sistem</span></div><div class="fields"><div class="row"><span class="k">aksi / label / detail json</span><span class="v">string / json</span><span class="t">snapshot</span></div></div><div class="ent-ft">Tanpa FK keras biar log gak hilang</div></article>
+    <article class="ent" data-domain="sistem"><div class="ent-hd"><h3>landing_pages + slides</h3><span class="badge" style="background:#F3E5F5;border-color:#E1BEE7">Sistem</span></div><div class="fields"><div class="row"><span class="k fk">◆ landing_page_id FK</span><span class="v">→ landing_pages</span><span class="t">cascade</span></div></div><div class="ent-ft">CMS single-row + carousel</div></article>
+  </div>
+
+  <div class="footer">
+    <b style="color:var(--ink)">Cara pakai:</b> Copy blok <b>Ringkas</b> buat laporan (bersih, B&W). Copy blok <b>Lengkap</b> buat lampiran. Label kayak <code>berisi</code> boleh diganti/dihapus — itu cuma kata bantu baca, bukan nama kolom. Warna hilang karena baris <code>%%{init...}%%</code> di paling atas.
+  </div>
+  <p style="text-align:center;color:var(--muted);font:500 11px 'JetBrains Mono',monospace;margin:14px 0 6px">© Sarana Agro Makmur • ERD v2 clean • 2026-10-04</p>
+</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.mermaid-box').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('box-'+t.dataset.tab).classList.add('active');
+  });
+});
+document.querySelectorAll('[data-copy]').forEach(b=>{
+  b.addEventListener('click', async()=>{
+    const id=b.getAttribute('data-copy');
+    const src=document.getElementById(id).textContent;
+    try{ await navigator.clipboard.writeText(src);}catch(e){
+      const ta=document.createElement('textarea');ta.value=src;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
+    }
+    const old=b.textContent;b.textContent='Tersalin ✓';setTimeout(()=>b.textContent=old,1400);
+  });
+});
+const chips=[...document.querySelectorAll('.chip')],cards=[...document.querySelectorAll('.ent')],q=document.getElementById('q');
+let active='all';
+function apply(){
+  const term=(q.value||'').toLowerCase().trim();
+  cards.forEach(c=>{
+    const dom=c.dataset.domain,txt=(c.textContent||'').toLowerCase();
+    c.classList.toggle('hidden', !((active==='all'||dom===active) && (!term||txt.includes(term))));
+  });
+}
+chips.forEach(ch=>ch.addEventListener('click',()=>{chips.forEach(x=>x.classList.remove('active'));ch.classList.add('active');active=ch.dataset.f;apply()}));
+q.addEventListener('input',apply);
+</script>

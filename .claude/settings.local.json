@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(php artisan tinker --execute=\"echo json_encode\\(\\\\App\\\\Models\\\\Kategori::withTrashed\\(\\)->get\\(['id','nama_kategori','created_at','deleted_at']\\)->toArray\\(\\)\\);\")",
+      "PowerShell(php artisan tinker --execute=\"foreach\\(\\\\App\\\\Models\\\\Kategori::withTrashed\\(\\)->get\\(\\) as \\\\$k\\) { echo \\\\$k->id . ' | ' . \\\\$k->nama_kategori . ' | ' . \\\\$k->created_at . ' | ' . \\\\$k->deleted_at . PHP_EOL; }\")",
+      "PowerShell(pip install *)",
+      "PowerShell(python -c \"import zipfile; docx = zipfile.ZipFile\\(r'd:\\\\SKPL SISTEM MANAJEMEN TOKO & GUDANG SARANA AGRO MAKMUR \\(1\\).docx'\\); print\\(len\\(docx.read\\('word/document.xml'\\)\\)\\)\")",
+      "PowerShell(ls \"C:\\\\Users\\\\HP\\\\OneDrive\\\\\" 2>&1 | Out-String -Width 500; echo \"---\"; [System.IO.Directory]::GetDirectories\\(\"C:\\\\Users\\\\HP\\\\OneDrive\"\\) | Out-String -Width 500)",
+      "PowerShell($p=\"C:\\\\Users\\\\HP\\\\OneDrive\\\\Hình ảnh\"; ls \"$p\" 2>&1 | Out-String -Width 600; echo \"===\"; ls \"$p\\\\Screenshot\" 2>&1 | Out-String -Width 600)",
+      "PowerShell(php -l routes/web.php; php -l app/Http/Controllers/TransaksiController.php; php -l resources/views/layouts/app.blade.php 2>&1 | Out-String -Width 600)"
+    ]
+  },
+  "skillOverrides": {
+    "roblox-game": "off"
+  }
+}

@@ -1,0 +1,183 @@
+<title>Perancangan Antarmuka — Sarana Agro Makmur</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFFEFB;--surface:#fff;--surface-2:#F4F6F1;--ink:#13211A;--muted:#6B7A70;--line:#E2E8DF;--accent:#0F6F4E;--radius:14px;--shadow:0 8px 28px rgba(19,33,26,.07)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1A14;--surface:#11261E;--surface-2:#162E24;--ink:#EAF2EC;--muted:#8AA89A;--line:#1E3A2E;--accent:#3DD598;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0B1A14;--surface:#11261E;--surface-2:#162E24;--ink:#EAF2EC;--muted:#8AA89A;--line:#1E3A2E;--accent:#3DD598;color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--ink);font-family:"Plus Jakarta Sans",system-ui,sans-serif;line-height:1.78;margin:0;padding:0 0 36px}
+.wrap{max-width:800px;margin:0 auto;padding:0 16px}@media(min-width:640px){.wrap{padding:0 24px}}
+.hero{border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--surface),var(--bg));padding:20px 0 18px;position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backdrop-filter:blur(8px)}
+.kicker{font:600 11px/1 "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:flex;gap:8px;align-items:center}
+.kicker i{width:28px;height:2px;background:var(--accent);border-radius:99px;display:inline-block}
+h1{font-family:Fraunces,serif;font-weight:800;font-size:clamp(24px,4vw,34px);line-height:1;letter-spacing:-.02em;margin:8px 0;text-wrap:balance}h1 em{font-style:normal;color:var(--accent)}
+.sub{color:var(--muted);font-size:13px;line-height:1.6;max-width:70ch}
+.pill{font:600 11px "JetBrains Mono",monospace;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted)}
+.pill strong{color:var(--ink)}.pill.accent{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 14px;border-radius:999px;font:600 13px "Plus Jakarta Sans",sans-serif;cursor:pointer}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:16px}
+.toc-hd{padding:12px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.toc-hd h2{font:700 12px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;margin:0}
+.toc ol{margin:0;padding:12px 16px 12px 28px;font-size:13px}
+.toc li{margin:4px 0}
+.toc a{color:var(--ink);text-decoration:none;border-bottom:1px dashed var(--line)}
+.toc a:hover{color:var(--accent)}
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:16px;scroll-margin-top:78px}
+.sec-hd{padding:14px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.sec-hd h2{font:800 15px Fraunces,serif;margin:0;line-height:1}
+.sec-hd h2 span{font:600 11px "JetBrains Mono",monospace;color:var(--muted);display:block;margin-top:2px}
+.badge{font:700 10px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:999px;border:1px solid var(--line)}
+.b-pemilik{background:#E8F5E9;color:#1B5E20;border-color:#C8E6C9}.b-kasir{background:#E3F2FD;color:#0D47A1;border-color:#BBDEFB}.b-both{background:var(--ink);color:var(--bg);border-color:var(--ink)}.b-umum{background:#FFF3E0;color:#8D4A00;border-color:#FFE0B2}
+.sec-body{padding:16px 18px}
+.sec-body p{margin:0;font-size:13.5px;color:var(--ink);text-align:justify}
+.sec-body p + p{margin-top:12px}
+.note{margin-top:10px;background:var(--surface-2);border:1px solid var(--line);border-left:3px solid var(--accent);padding:8px 10px;border-radius:0 10px 10px 0;font-size:12px;color:var(--muted)}
+.note b{color:var(--ink)}
+code{font-family:"JetBrains Mono",monospace;font-size:12px;background:var(--surface-2);padding:2px 6px;border-radius:6px;border:1px solid var(--line)}
+</style>
+<div class="hero"><div class="wrap">
+  <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-start">
+    <div style="flex:1;min-width:280px">
+      <div class="kicker"><i></i> BAB 4 • Perancangan Antarmuka — POS Sarana Agro Makmur</div>
+      <h1>Perancangan <em>antarmuka</em> — narasi visual per halaman</h1>
+      <p class="sub">Setiap halaman dijelaskan seperti contoh Login: sebut pembagian layout, komponen yang terlihat, hingga validasi. Rute & middleware <code>CekRole</code> jadi acuan — sudah diaudit per <code>routes/web.php</code>.</p>
+      <div class="meta">
+        <span class="pill"><strong>15</strong> halaman</span>
+        <span class="pill">Pemilik & Kasir — sesuai role asli</span>
+        <span class="pill accent">Gaya narasi visual</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;align-self:flex-start"><button class="btn primary" onclick="window.print()">Cetak / PDF</button></div>
+  </div>
+</div></div>
+<div class="wrap">
+  <nav class="toc">
+    <div class="toc-hd"><h2>Daftar isi</h2><span style="font:500 11px 'JetBrains Mono',monospace;color:var(--muted)">klik lompat</span></div>
+    <ol>
+      <li><a href="#s01">Landing (CMS internal)</a></li>
+      <li><a href="#s02">Login</a></li>
+      <li><a href="#s03">Dashboard Pemilik</a></li>
+      <li><a href="#s04">Dashboard Kasir</a></li>
+      <li><a href="#s05">Kategori</a></li>
+      <li><a href="#s06">Produk</a></li>
+      <li><a href="#s07">Transfer Stok</a></li>
+      <li><a href="#s08">Pelanggan — fix: pemilik saja</a></li>
+      <li><a href="#s09">Suplier</a></li>
+      <li><a href="#s10">Penjualan (POS)</a></li>
+      <li><a href="#s11">Pembelian (Kulak)</a></li>
+      <li><a href="#s12">Diskon</a></li>
+      <li><a href="#s13">Akuntansi — nonaktif saat ini</a></li>
+      <li><a href="#s14">Laporan</a></li>
+      <li><a href="#s15">Riwayat Aksi, Pengaturan & Profil</a></li>
+    </ol>
+  </nav>
+
+  <section class="sec" id="s01">
+    <div class="sec-hd"><h2>Landing — CMS internal <span>Pengaturan Landing • tidak publik saat ini</span></h2><span class="badge b-pemilik">Pemilik</span></div>
+    <div class="sec-body">
+      <p>Halaman Landing pada kondisi saat ini bukan halaman publik yang berdiri di <code>/</code> melainkan halaman CMS internal yang berada di dalam menu Pengaturan dan hanya dapat diakses oleh pemilik, karena rute <code>/</code> pada <code>routes/web.php</code> langsung mengarahkan pengunjung ke halaman Login. Secara tampilan, halaman ini menampilkan form pengaturan di bagian atas berisi input judul besar, highlight, dan deskripsi toko, kemudian form branding login di bawahnya yang berisi upload logo, ikon, judul brand, subjudul, pilihan warna latar dan warna teks, pilihan font, serta upload hero image, dan di bagian paling bawah terdapat daftar slide carousel yang menampilkan thumbnail gambar atau video beserta tombol hapus dan handle drag untuk mengatur urutan serta tombol Upload Slide di sisi kanan atas. Seluruh konten tersebut disimpan pada tabel <code>landing_pages</code> dan <code>landing_slides</code> dan digunakan untuk membentuk branding pada halaman Login.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s02">
+    <div class="sec-hd"><h2>Login <span>Pemilik & Kasir — satu form, dibedakan role</span></h2><span class="badge b-both">Pemilik & Kasir</span></div>
+    <div class="sec-body">
+      <p>Halaman Login merupakan halaman pertama yang muncul saat pengguna mengakses sistem dan berfungsi sebagai gerbang autentikasi sebelum pengguna dapat masuk ke dalam sistem manajemen toko. Secara tampilan, halaman ini terbagi menjadi dua bagian yaitu sisi kiri yang menampilkan logo, nama sistem "Sarana Agro Makmur", dan keterangan "Sistem Manajemen Toko" dengan latar warna yang dapat diatur oleh pemilik, serta sisi kanan yang berisi formulir login. Pada formulir login terdapat dua kolom input yang harus diisi oleh pengguna yaitu Email dan Password, pengguna diminta memasukkan alamat email yang terdaftar dan password yang sesuai. Terdapat juga fitur tambahan seperti checkbox "Ingat saya" untuk menyimpan sesi login serta tautan "Lupa password?" yang dapat digunakan jika pengguna mengalami kendala saat login. Setelah data diisi pengguna menekan tombol "Masuk", sistem kemudian akan memvalidasi data tersebut pada tabel <code>users</code>, jika email dan password benar maka pemilik akan diarahkan ke Dashboard Pemilik sedangkan kasir akan diarahkan ke Dashboard Kasir/POS sesuai dengan <code>role</code> melalui middleware <code>CekRole</code>, namun jika data salah atau kosong sistem akan menampilkan pesan kesalahan langsung di bawah form tanpa memindahkan halaman.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s03">
+    <div class="sec-hd"><h2>Dashboard Pemilik <span>Pusat monitoring real-time</span></h2><span class="badge b-pemilik">Pemilik</span></div>
+    <div class="sec-body">
+      <p>Dashboard Pemilik merupakan halaman utama yang otomatis terbuka setelah pemilik berhasil login dan berfungsi sebagai pusat informasi untuk memantau kondisi toko dan Gudang Sarana Agro Makmur secara real-time. Secara tampilan, halaman ini tersusun dari atas ke bawah dimulai dari baris paling atas yang menampilkan empat kartu ringkasan yang berjajar yaitu Total Transaksi Periode, Total Penjualan Periode, Produk Terjual Periode, dan Stok Menipis, di bawahnya terdapat dua panel yang bersebelahan yaitu sisi kiri menampilkan Grafik Penjualan berbentuk batang atau garis dan sisi kanan menampilkan daftar Produk Terlaris Periode dalam bentuk tabel peringkat. Di atas grafik terdapat filter yang dapat digunakan pemilik untuk mengubah periode menjadi Bulan ini, 3 bulan, atau 1 tahun serta dropdown untuk memilih bulan tertentu, ketika filter diubah maka grafik dan kartu ringkasan akan diperbarui sesuai periode yang dipilih. Jika terdapat stok yang menipis sistem akan menampilkan badge peringatan berwarna dan tombol "Cek Stok Detail" yang dapat diklik untuk melihat rincian stok produk, di bagian paling bawah terdapat tabel Transaksi Terakhir yang menampilkan aktivitas penjualan terbaru sehingga pemilik mendapatkan gambaran menyeluruh mengenai performa bisnis tanpa perlu berpindah menu.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s04">
+    <div class="sec-hd"><h2>Dashboard Kasir <span>Ringkas — fokus jualan hari ini</span></h2><span class="badge b-kasir">Kasir</span></div>
+    <div class="sec-body">
+      <p>Dashboard Kasir merupakan halaman ringkas yang otomatis terbuka setelah kasir berhasil login dan dirancang khusus agar kasir dapat langsung fokus pada aktivitas penjualan harian tanpa melihat data keuangan sensitif milik pemilik, rute <code>/dashboard</code> dapat diakses oleh pemilik maupun kasir namun isinya dibedakan oleh controller berdasarkan role. Secara tampilan, halaman ini jauh lebih sederhana dibandingkan dashboard pemilik, di bagian atas hanya terdapat dua kartu ringkasan yang berjajar yaitu Jumlah Transaksi Hari Ini dan Total Penjualan Hari Ini yang difilter khusus untuk kasir yang sedang login, di bawahnya terdapat tabel Transaksi Saya yang menampilkan daftar penjualan yang ia lakukan pada hari tersebut beserta tombol aksi untuk melihat struk. Di sisi kanan atas terdapat tombol besar "Buat Penjualan Baru" yang ketika ditekan akan langsung mengarahkan kasir ke halaman POS, jika terdapat stok yang menipis sistem hanya menampilkan informasi read-only sebagai pengingat tanpa tombol pengelolaan karena pengelolaan stok hanya dapat dilakukan oleh pemilik.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s05">
+    <div class="sec-hd"><h2>Kategori <span>Master pengelompokan produk</span></h2><span class="badge b-pemilik">Pemilik</span></div>
+    <div class="sec-body">
+      <p>Halaman Kategori berfungsi untuk mengelompokkan produk seperti Sembako, Pupuk, atau Obat-obatan agar pencarian dan laporan menjadi lebih rapi dan sesuai <code>routes/web.php</code> hanya dapat dikelola oleh pemilik. Secara tampilan, halaman ini didominasi oleh tabel di bagian tengah yang menampilkan kolom nama kategori, status aktif atau tidak aktif, dan jumlah produk di dalamnya, di atas tabel terdapat kolom pencarian dan tombol "Tambah Kategori" di sisi kanan. Ketika tombol Tambah ditekan akan muncul modal form di tengah layar yang berisi input nama kategori dan pilihan status, setelah disimpan data akan langsung muncul di tabel, pada setiap baris tabel juga terdapat tombol aksi Edit dan Hapus di sisi kanan, jika Hapus ditekan akan muncul konfirmasi terlebih dahulu dan data yang dihapus bersifat soft delete sehingga tidak benar-benar hilang dari database. Kasir tidak memiliki akses ke halaman ini.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s06">
+    <div class="sec-hd"><h2>Produk <span>Master produk — stok ganda gudang & toko</span></h2><span class="badge b-pemilik">Pemilik</span></div>
+    <div class="sec-body">
+      <p>Halaman Produk merupakan master utama yang sesuai <code>routes/web.php</code> hanya dapat dikelola oleh pemilik, kasir tidak memiliki akses ke halaman ini dan hanya dapat melihat daftar produk melalui pencarian pada halaman Penjualan. Secara tampilan, halaman ini didominasi oleh tabel besar di bagian tengah yang menampilkan kolom kode produk, nama produk, kategori, harga satuan, harga grosir, stok gudang, stok toko, dan satuan. Di atas tabel terdapat filter dropdown kategori di sisi kiri dan kolom pencarian kode atau nama di sisi kanan serta tombol "Tambah Produk" yang ketika ditekan akan membuka form modal berisi input kode unik, nama produk, pilihan kategori, harga beli, harga satuan, harga grosir, batas minimal grosir, isi per dus, dan satuan. Pada setiap baris produk yang stoknya menipis akan muncul badge berwarna merah sebagai penanda, dan di sisi kanan baris terdapat tombol aksi Edit, Hapus, serta shortcut Transfer Stok yang mengarah ke halaman pemindahan barang.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s07">
+    <div class="sec-hd"><h2>Transfer Stok <span>Gudang → Toko via konversi dus</span></h2><span class="badge b-pemilik">Pemilik</span></div>
+    <div class="sec-body">
+      <p>Halaman Transfer Stok sesuai <code>routes/web.php</code> hanya dapat diakses oleh pemilik dan digunakan untuk memindahkan barang dari gudang ke toko dengan mekanisme konversi dus ke pcs yang dihitung otomatis berdasarkan nilai isi per dus pada produk, sehingga pemilik cukup memilih produk dan memasukkan jumlah dus maka sistem akan langsung menampilkan preview jumlah pcs yang akan dipindahkan. Secara tampilan, halaman ini terbagi menjadi dua bagian yaitu form transfer di bagian atas dan tabel riwayat di bagian bawah, pada form bagian atas terdapat dropdown pemilihan produk di sisi kiri yang ketika dipilih akan menampilkan stok gudang saat ini di sebelahnya serta input jumlah dus di sisi kanan yang ketika diisi akan langsung menampilkan preview jumlah pcs di bawahnya, di bawahnya lagi terdapat input tanggal dan kolom keterangan opsional serta tombol "Transfer" di sisi kanan bawah. Ketika tombol Transfer ditekan sistem akan memeriksa apakah stok gudang mencukupi, jika tidak mencukupi maka akan muncul pesan peringatan berwarna merah di atas form dan proses dibatalkan, namun jika mencukupi maka stok gudang akan berkurang dan stok toko akan bertambah yang hasilnya langsung terlihat pada tabel riwayat transfer di bawah form.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s08">
+    <div class="sec-hd"><h2>Pelanggan <span>Master pembeli — pemilik saja</span></h2><span class="badge b-pemilik">Pemilik</span></div>
+    <div class="sec-body">
+      <p>Halaman Pelanggan berfungsi untuk mencatat data pembeli dan sesuai <code>routes/web.php</code> hanya dapat dikelola oleh pemilik, kasir tidak memiliki akses untuk menambah atau mengubah data pelanggan dan hanya dapat memilih pelanggan yang sudah ada pada saat melakukan penjualan di halaman POS. Secara tampilan, halaman ini menampilkan tabel di bagian tengah yang berisi kolom nama pelanggan, nomor HP, alamat, dan tipe yang ditampilkan dalam bentuk badge berwarna berbeda untuk member dan non-member, di atas tabel terdapat kolom pencarian di sisi kiri dan tombol "Tambah Pelanggan" di sisi kanan yang ketika ditekan akan membuka modal form berisi input nama, nomor HP, alamat, dan pilihan tipe member atau non-member. Pemilik dapat menekan tombol Edit atau Hapus pada setiap baris untuk mengubah atau menghapus data yang bersifat soft delete, dan data pelanggan yang sudah tersimpan akan muncul sebagai pilihan pada halaman Penjualan sehingga jika pelanggan bertipe member dan terdapat promo khusus member maka diskon akan terhitung otomatis pada struk.</p>
+      <div class="note"><b>Fix:</b> sebelumnya tertulis "dikelola bersama pemilik dan kasir" — dikoreksi menjadi <b>pemilik saja</b> sesuai rute <code>role:pemilik</code> untuk <code>pelanggan</code>.</div>
+    </div>
+  </section>
+
+  <section class="sec" id="s09">
+    <div class="sec-hd"><h2>Suplier <span>Data pemasok — via Pengaturan</span></h2><span class="badge b-pemilik">Pemilik</span></div>
+    <div class="sec-body">
+      <p>Halaman Suplier digunakan oleh pemilik untuk mendata seluruh pemasok barang dan sesuai <code>routes/web.php</code> berada di dalam grup Pengaturan dengan rute <code>pengaturan/suplier</code> sehingga hanya pemilik yang dapat mengaksesnya. Secara tampilan, halaman ini menampilkan tabel di bagian tengah yang berisi kolom nama suplier, nomor HP, dan alamat, di atas tabel terdapat kolom pencarian dan tombol "Tambah Suplier" di sisi kanan yang ketika ditekan akan membuka modal form berisi input nama suplier, nomor HP, dan alamat, pada setiap baris tabel juga terdapat tombol Edit dan Hapus di sisi kanan. Data suplier yang sudah tersimpan akan muncul sebagai pilihan wajib berbentuk dropdown pada halaman Pembelian sehingga setiap transaksi kulak tercatat dengan jelas berasal dari suplier mana untuk keperluan histori dan audit.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s10">
+    <div class="sec-hd"><h2>Penjualan (POS Kasir) <span>Core — scan, diskon, bayar & struk</span></h2><span class="badge b-both">Kasir & Pemilik</span></div>
+    <div class="sec-body">
+      <p>Halaman Penjualan atau POS Kasir merupakan halaman inti yang sesuai <code>routes/web.php</code> dapat diakses oleh kasir maupun pemilik melalui grup <code>role:kasir,pemilik</code> dan menjadi fitur utama kasir. Secara tampilan, halaman ini terbagi menjadi tiga panel yaitu panel kiri menampilkan daftar produk yang dapat dicari melalui scan barcode atau kolom pencarian beserta informasi stok toko dan harga, panel tengah menampilkan keranjang belanja berisi daftar produk yang dipilih lengkap dengan stepper jumlah, label tipe eceran atau grosir yang terisi otomatis berdasarkan batas minimal grosir, dan nominal diskon per baris yang muncul jika ada promo aktif, sedangkan panel kanan menampilkan ringkasan belanja. Pada panel kanan bagian atas terdapat dropdown pemilihan pelanggan yang bersifat opsional, di bawahnya terdapat rincian subtotal, total diskon, dan total bayar yang terhitung otomatis, kemudian input nominal bayar yang ketika diisi akan langsung menampilkan kembalian di bawahnya serta pilihan metode pembayaran dan tombol besar "Bayar & Cetak Struk" di bagian paling bawah. Ketika tombol Bayar ditekan sistem akan memvalidasi ketersediaan stok toko dan memastikan nominal bayar mencukupi, jika stok kurang atau bayar kurang maka akan muncul pesan kesalahan di atas ringkasan, namun jika valid maka transaksi beserta rinciannya akan disimpan ke tabel <code>transaksi</code> dan <code>detail_transaksi</code>, stok toko akan berkurang, dan struk akan tampil dalam modal siap cetak.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s11">
+    <div class="sec-hd"><h2>Pembelian (Kulak) <span>Restock dari suplier — pemilik saja</span></h2><span class="badge b-pemilik">Pemilik</span></div>
+    <div class="sec-body">
+      <p>Halaman Pembelian atau Kulak sesuai <code>routes/web.php</code> hanya dapat diakses oleh pemilik dan berfungsi untuk mencatat barang masuk dari suplier sekaligus menambah stok gudang atau toko beserta harga belinya yang akan digunakan untuk perhitungan HPP. Secara tampilan, halaman ini didominasi oleh form di bagian atas yang berisi dropdown pemilihan suplier yang wajib diisi dan ditampilkan dengan jelas di baris pertama, di bawahnya terdapat tabel item pembelian yang menampilkan kolom produk, jumlah, harga beli, dan tipe stok berupa pilihan gudang atau toko pada setiap baris beserta tombol tambah baris dan hapus baris di sisi kanan. Di bawah tabel terdapat input tanggal dan kolom keterangan serta rincian total pembelian yang terhitung otomatis di sisi kanan bawah beserta tombol "Simpan Pembelian", ketika tombol tersebut ditekan sistem akan menyimpan data ke tabel <code>transaksi</code> dengan jenis pembelian beserta rinciannya pada <code>detail_transaksi</code> yang menyimpan harga beli, kemudian menambah stok gudang atau stok toko sesuai dengan tipe stok yang dipilih pada setiap baris, sehingga stok terbaru langsung terlihat ketika pemilik kembali ke halaman Produk. Kasir tidak memiliki akses ke halaman ini.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s12">
+    <div class="sec-hd"><h2>Diskon <span>Promo umum & member-only — pemilik saja</span></h2><span class="badge b-pemilik">Pemilik</span></div>
+    <div class="sec-body">
+      <p>Halaman Diskon sesuai <code>routes/web.php</code> hanya dapat dikelola oleh pemilik dan berfungsi untuk membuat promo yang akan terhitung otomatis saat penjualan. Secara tampilan, halaman ini menampilkan tabel di bagian tengah yang berisi kolom nama diskon, besar potongan, periode mulai dan selesai, lokasi berlaku, target member, dan status aktif yang ditampilkan dengan toggle switch di sisi kanan setiap baris, di atas tabel terdapat tombol "Buat Diskon" yang ketika ditekan akan membuka form modal berisi input nama diskon, besar potongan, minimal pembelian eceran maupun grosir, tanggal mulai dan selesai, pilihan lokasi berlaku berupa semua, gudang, atau toko, serta dropdown target member yang bersifat opsional dan multi-select daftar produk yang termasuk dalam promo tersebut. Jika kolom target member dikosongkan maka promo bersifat umum untuk semua pembeli namun jika diisi dengan salah satu pelanggan maka promo hanya berlaku untuk member tersebut, ketika kasir melakukan penjualan sistem akan secara otomatis mencocokkan produk, periode, lokasi, dan status member untuk menentukan apakah diskon layak diberikan. Kasir tidak dapat mengelola diskon.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s13">
+    <div class="sec-hd"><h2>Akuntansi — Akun, Jurnal & Beban <span>Saat ini nonaktif (ponytail: disabled)</span></h2><span class="badge b-pemilik">Pemilik — nonaktif</span></div>
+    <div class="sec-body">
+      <p>Halaman Akuntansi yang terdiri dari Daftar Akun, Jurnal Umum, dan Beban Operasional pada kondisi kode saat ini berstatus <b>nonaktif</b> karena seluruh rute <code>akuntansi/*</code> pada <code>routes/web.php</code> sedang dikomentari dengan catatan <code>ponytail: akuntansi disabled — UI disembunyi, code tetap ada</code>, sehingga pemilik tidak dapat mengaksesnya melalui sidebar maupun URL langsung dan modul ini tidak tampil pada perancangan antarmuka yang aktif. Secara rancangan, Daftar Akun direncanakan menampilkan tabel berisi kode akun yang unik, nama akun, posisi saldo debet atau kredit, posisi laporan neraca atau laba-rugi, serta kategori dan flag kas dengan tombol Tambah Akun di atas tabel, Jurnal Umum direncanakan menampilkan form pembuatan jurnal manual yang terdiri dari input tanggal dan nomor jurnal otomatis di baris atas kemudian tabel baris jurnal di bawahnya yang setiap barisnya berisi dropdown pemilihan akun, input nominal debet, input nominal kredit, dan kolom keterangan beserta indikator hijau jika balance dan merah jika tidak balance serta tombol Simpan Jurnal di sisi kanan bawah, sedangkan Beban Operasional direncanakan menampilkan form sederhana berisi input tanggal, dropdown akun beban, input nama beban, input jumlah, dan kolom keterangan yang ketika disimpan akan otomatis membuat jurnal berpasangan melalui <code>JurnalService</code>, namun seluruh rancangan tersebut baru akan aktif kembali setelah blok rute akuntansi di-uncomment dan sidebar dipulihkan.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s14">
+    <div class="sec-hd"><h2>Laporan <span>Pemilik & Kasir — filter tanggal & export</span></h2><span class="badge b-both">Pemilik & Kasir</span></div>
+    <div class="sec-body">
+      <p>Halaman Laporan sesuai <code>routes/web.php</code> dapat diakses oleh pemilik maupun kasir melalui grup <code>role:pemilik,kasir,pemilik2</code> dan berfungsi untuk menyajikan rekap operasional yang siap cetak. Secara tampilan, halaman ini memiliki filter rentang tanggal berupa dua input tanggal dari dan sampai di bagian atas beserta tombol Tampilkan di sisi kanannya dan tombol Export Excel atau Cetak di ujung kanan, bagian tengah menampilkan tabel transaksi beserta rinciannya sesuai rentang tanggal yang dipilih dengan baris ringkasan total di bagian bawah tabel. Berbeda dengan Laporan Keuangan yang saat ini nonaktif bersama modul akuntansi, Laporan pada rute ini menampilkan data operasional dari tabel <code>transaksi</code> dan <code>detail_transaksi</code> sehingga kasir dapat melihat rekap penjualannya sendiri sedangkan pemilik dapat melihat keseluruhan.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="s15">
+    <div class="sec-hd"><h2>Riwayat Aksi, Pengaturan & Profil <span>Audit, CMS & akun</span></h2><span class="badge b-pemilik">Pemilik</span> <span class="badge b-both">Profil: Pemilik & Kasir</span></div>
+    <div class="sec-body">
+      <p>Halaman Riwayat Aksi berfungsi sebagai jejak audit yang sesuai <code>routes/web.php</code> hanya dapat dilihat oleh pemilik dan secara tampilan menampilkan tabel di bagian tengah yang berisi kolom waktu, nama pengguna beserta badge rolenya, jenis aksi seperti login, penjualan, pembelian, transfer, atau beban, label transaksi, nominal, dan tautan ke transaksi terkait, di atas tabel terdapat filter berupa dropdown jenis aksi, input rentang tanggal, dan dropdown pengguna di sisi kanan serta kolom pencarian, dan ketika salah satu baris diklik maka akan terbuka panel detail di bawah baris tersebut yang menampilkan snapshot data dalam format JSON, alamat IP, dan user agent sebagai bukti forensik. Halaman Pengaturan juga hanya dapat diakses oleh pemilik dan secara tampilan terbagi menjadi dua bagian yaitu form pengaturan landing di bagian atas yang berisi input judul besar, highlight, dan deskripsi, kemudian form branding login di bawahnya yang berisi upload logo, ikon, judul brand, subjudul, pilihan warna latar dan warna teks, pilihan font, serta upload hero image, di bawahnya lagi terdapat section kelola slide carousel yang menampilkan daftar slide berupa thumbnail gambar atau video beserta tombol hapus dan handle drag untuk mengatur urutan serta tombol Upload Slide di sisi kanan atas, dan di dalam Pengaturan tersebut juga terdapat sub-menu Kelola Kasir untuk menambah, mengedit, atau menghapus akun kasir serta Kelola Suplier yang berada pada rute <code>pengaturan/suplier</code>. Sedangkan Halaman Profil dapat diakses oleh pemilik maupun kasir melalui rute <code>/profile</code> yang berada di grup umum untuk mengelola akunnya masing-masing dan secara tampilan hanya menampilkan form sederhana di tengah halaman yang berisi input nama, input email, serta section ganti password yang terdiri dari input password saat ini, password baru, dan konfirmasi password baru beserta tombol Simpan di bagian bawah, sehingga setiap role tetap dapat menjaga keamanan akunnya sendiri tanpa bisa mengubah pengaturan sistem.</p>
+    </div>
+  </section>
+
+  <p style="text-align:center;color:var(--muted);font:500 11px 'JetBrains Mono',monospace;margin:18px 0 4px">© Sarana Agro Makmur • Perancangan Antarmuka — narasi visual (audit routes/web.php) • 2026-10-04 • Cetak: Ctrl+P → Save as PDF</p>
+</div>
