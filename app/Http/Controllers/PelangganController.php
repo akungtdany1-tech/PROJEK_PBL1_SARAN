@@ -8,20 +8,20 @@ use Illuminate\Http\Request;
 
 class PelangganController extends Controller
 {
-    // 🔹 TAMPILKAN DATA
+    //  TAMPILKAN DATA
     public function index()
     {
         $pelanggan = Pelanggan::all();
         return view('pelanggan.index', compact('pelanggan'));
     }
 
-    // 🔹 FORM TAMBAH
+    //  FORM TAMBAH
     public function create()
     {
         return view('pelanggan.create');
     }
 
-    // 🔹 SIMPAN DATA
+    //  SIMPAN DATA
     public function store(Request $request)
     {
         $request->validate([
@@ -34,14 +34,14 @@ class PelangganController extends Controller
         return redirect('/pelanggan')->with('success', 'Data pelanggan berhasil ditambahkan');
     }
 
-    // 🔹 FORM EDIT
+    //  FORM EDIT
     public function edit($id)
     {
         $pelanggan = Pelanggan::findOrFail($id);
         return view('pelanggan.edit', compact('pelanggan'));
     }
 
-    // 🔹 UPDATE DATA
+    //  UPDATE DATA
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -55,7 +55,7 @@ class PelangganController extends Controller
         return redirect('/pelanggan')->with('success', 'Data pelanggan berhasil diupdate');
     }
 
-    // 🔹 HAPUS DATA (soft delete)
+    //  HAPUS DATA (soft delete)
     public function destroy($id)
     {
         $pelanggan = Pelanggan::findOrFail($id);
@@ -64,14 +64,14 @@ class PelangganController extends Controller
         return redirect('/pelanggan')->with('success', 'Data pelanggan berhasil dihapus (masuk ke Sampah)');
     }
 
-    // 🔹 SAMPAH (hanya yang sudah dihapus)
+    //  SAMPAH (hanya yang sudah dihapus)
     public function sampah()
     {
         $sampah = Pelanggan::onlyTrashed()->latest('deleted_at')->get();
         return view('pelanggan.sampah', compact('sampah'));
     }
 
-    // 🔹 PULIHKAN (restore)
+    //  PULIHKAN (restore)
     public function pulihkan($id)
     {
         $p = Pelanggan::withTrashed()->findOrFail($id);
@@ -80,7 +80,7 @@ class PelangganController extends Controller
         return redirect()->route('pelanggan.sampah')->with('success', 'Pelanggan berhasil dipulihkan');
     }
 
-    // 🔹 HAPUS PERMANEN
+    //  HAPUS PERMANEN
     public function hapusPermanen($id)
     {
         $p = Pelanggan::withTrashed()->findOrFail($id);

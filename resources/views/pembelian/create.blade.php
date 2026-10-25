@@ -288,7 +288,7 @@
             }
         });
 
-        // ========== FUNGSI SIMPAN DENGAN FETCH ==========
+        // FUNGSI SIMPAN DENGAN FETCH 
         function simpanPembelian() {
             // Validasi basic
             const tanggal = document.getElementById('tanggal').value;

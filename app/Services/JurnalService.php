@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class JurnalService
 {
-    // ═══ PENJUALAN ═══
+    // PENJUALAN 
     // D 1101 Kas = total, C 4101 Pendapatan Penjualan = total
     // D 5101 HPP, C 1104 Persediaan = harga pokok barang yang terjual
     public static function buatJurnalPenjualan(Transaksi $t): Jurnal
@@ -78,7 +78,7 @@ class JurnalService
         return $jurnal;
     }
 
-    // ═══ PEMBELIAN ═══
+    // PEMBELIAN 
     // D 1104 Persediaan = total, C 2101 Utang Usaha = total
     public static function buatJurnalPembelian(Transaksi $t): Jurnal
     {
@@ -119,7 +119,7 @@ class JurnalService
         return $jurnal;
     }
 
-    // ═══ BEBAN OPERASIONAL ═══
+    // BEBAN OPERASIONAL
     // D [akun beban] = jumlah, C 1101 Kas = jumlah
     public static function buatJurnalBeban(BebanOperasional $b): Jurnal
     {
@@ -161,7 +161,7 @@ class JurnalService
         return $jurnal;
     }
 
-    // ═══ JURNAL MANUAL ═══
+    // JURNAL MANUAL
     public static function buatJurnalManual(string $tanggal, ?string $keterangan, array $lines, int $idUser): Jurnal
     {
         $totalDebet = array_sum(array_column($lines, 'debet'));
@@ -200,13 +200,13 @@ class JurnalService
         return $jurnal;
     }
 
-    // ═══ VOID JURNAL ═══
+    // . VOID JURNAL .
     public static function voidJurnal(string $refType, int $refId): void
     {
         Jurnal::where('ref_type', $refType)->where('ref_id', $refId)->delete();
     }
 
-    // ═══ HELPERS ═══
+    // . HELPERS .
     public static function akunId(string $kode): int
     {
         $akun = Akun::where('kode_akun', $kode)->first();

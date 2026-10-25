@@ -19,7 +19,7 @@ use Carbon\Carbon;
 
 class TransaksiController extends Controller
 {
-    // ==================== PENJUALAN ====================
+    // PENJUALAN 
 
     public function index()
     {
@@ -286,7 +286,7 @@ class TransaksiController extends Controller
         return redirect()->route('transaksi.sampah')->with('success', 'Transaksi berhasil dihapus permanen');
     }
 
-    // ==================== PEMBELIAN ====================
+    // PEMBELIAN 
 
     public function indexPembelian()
     {
@@ -408,7 +408,7 @@ class TransaksiController extends Controller
     return view('pembelian.show', compact('pembelian'));
 }
 
-// ==================== CETAK STRUK ====================
+// CETAK STRUK 
     public function printStruk($id)
     {
         $transaksi = Transaksi::with(['detail.produk', 'pelanggan', 'kasir'])

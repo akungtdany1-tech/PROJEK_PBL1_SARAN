@@ -40,6 +40,5 @@ class RiwayatController extends Controller
         return view('riwayat.index', compact('riwayat', 'dari', 'sampai', 'kejadian', 'cari'));
     }
 
-    // ponytail: destroy disabled — riwayat audit immutabel, jangan expose DELETE lagi
-    // public function destroy($id) { ... }
+    
 }

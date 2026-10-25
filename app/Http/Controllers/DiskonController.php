@@ -27,8 +27,8 @@ class DiskonController extends Controller
         $request->validate([
             'nama_diskon'         => 'required|string|max:150',
             'besar_diskon'        => 'required|integer|min:1|max:100',
-            'minimal_beli'        => 'nullable|integer|min:0', // Buat nullable
-            'minimal_beli_grosir' => 'nullable|integer|min:0', // Buat nullable
+            'minimal_beli'        => 'nullable|integer|min:0', // nullable
+            'minimal_beli_grosir' => 'nullable|integer|min:0', // nullable
             'mulai_tgl'           => 'required|date',
             'selesai_tgl'         => 'required|date|after_or_equal:mulai_tgl',
             'lokasi_berlaku'      => 'required|in:semua,gudang,toko',

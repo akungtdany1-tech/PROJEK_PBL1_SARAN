@@ -43,7 +43,7 @@ class LaporanKeuanganController extends Controller
         return $posSaldo === 'debet' ? $selisih : -$selisih;
     }
 
-    // ═══════════════ LABA RUGI ═══════════════
+    // . LABA RUGI .
 
     public function labaRugi(Request $request)
     {
@@ -79,7 +79,7 @@ class LaporanKeuanganController extends Controller
         ));
     }
 
-    // ═══════════════ NERACA ═══════════════
+    // . NERACA .
 
     public function neraca(Request $request)
     {
@@ -136,7 +136,7 @@ class LaporanKeuanganController extends Controller
         ));
     }
 
-    // ═══════════════ ARUS KAS ═══════════════
+    // . ARUS KAS .
 
     public function arusKas(Request $request)
     {
